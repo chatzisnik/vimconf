@@ -1,0 +1,86 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'scrooloose/nerdtree'
+Plugin 'bling/vim-airline'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+" Extended matching capabilities in terms of jumping around.
+Plugin 'matchit.zip' 
+Plugin 'Yggdroot/indentLine'
+" Highlighting mathcingi html pairs
+Plugin 'Valloric/MatchTagAlways'
+Plugin 'alvan/vim-closetag'
+Plugin 'mattn/emmet-vim'
+
+ 
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+let macvim_skip_colorscheme=1
+let mapleader = "\<Space>"
+colorscheme molokai
+set number relativenumber
+set autoindent
+set smartindent
+"tab specific - remember to make this work different on every filetype
+set tabstop=4
+set shiftwidth=4 
+"search specific
+set hlsearch!
+set ignorecase
+set incsearch
+set hlsearch!
+set hidden
+
+nnoremap <F3> :set hlsearch!<CR>
+
+"enable syntax
+syntax enable
+set wrap
+"mouse specific stuff
+set mouse=a
+"Keymappings
+map <Leader>n :NERDTreeToggle<CR>
+
+"buffer related binds
+nnoremap <Leader>bb :ls<CR>:b<Space>
+nnoremap <Leader>rs :source %<CR>
+map <Leader>bn :bn<cr>
+map <Leader>bp :bp<cr>
+map <Leader>bd :bw<cr> 
+"autocomplete control space
+inoremap <C-Space> <C-x><C-o>
+inoremap <C-@> <C-Space> 
+
+map <Leader>es :source %<CR>
+map <Leader>ec :e ~/.vim/vimrc<CR>
+
+"window related binds
+nmap <silent> <C-h> :wincmd h<CR>
+nmap <silent> <C-j> :wincmd j<CR>
+nmap <silent> <C-k> :wincmd k<CR>
+nmap <silent> <C-l> :wincmd l<CR>
+
+"close nerdtree if it's the last tab
+"
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+"autocompletion for certain languages
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+
+"buffers on top
+let g:airline#extensions#tabline#enabled = 1
+
