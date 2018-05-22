@@ -1,0 +1,112 @@
+if &compatible
+	set nocompatible
+endif
+" Add the dein installation directory into runtimepath
+set runtimepath+=/Users/nickchatzis/.config/nvim/bundle/dein/repos/github.com/Shougo/dein.vim
+
+if dein#load_state('/Users/nickchatzis/.config/nvim/bundle/dein')
+	call dein#begin('/Users/nickchatzis/.config/nvim/bundle/dein')
+
+	call dein#add('/Users/nickchatzis/.config/nvim/bundle/dein')
+	call dein#add('Shougo/deoplete.nvim')
+	call dein#add('Shougo/dein.vim')
+	call dein#add('/usr/local/opt/fzf')
+	call dein#add('junegunn/fzf.vim')
+	call dein#add('w0rp/ale')
+
+	call dein#add('flazz/vim-colorschemes')
+	call dein#add('scrooloose/nerdtree')
+	call dein#add('bling/vim-airline')
+	call dein#add('scrooloose/nerdcommenter')
+	call dein#add('tpope/vim-surround')
+	call dein#add('tpope/vim-repeat')
+	call dein#add('Yggdroot/indentLine')
+	" Highlighting mathcingi html pairs
+	call dein#add('Valloric/MatchTagAlways')
+	call dein#add('alvan/vim-closetag')
+	call dein#add('easymotion/vim-easymotion')
+	call dein#add('pangloss/vim-javascript')
+	call dein#add('padawan-php/deoplete-padawan')
+	"call dein#add('lvht/phpcd.vim', {'on_ft': ['php'], } )
+
+	call dein#end()
+	call dein#save_state()
+endif
+
+filetype plugin indent on    " required
+
+let mapleader = "\<Space>"
+
+" Deoplete specific stuff
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#min_pattern_length = 1
+
+colorscheme molokai
+set clipboard=unnamedplus
+set number relativenumber
+set autoindent
+set smartindent
+"tab specific - remember to make this work different on every filetype
+set tabstop=4
+set shiftwidth=4 
+"search specific
+set hlsearch!
+set ignorecase
+set incsearch
+set hlsearch!
+set hidden
+
+nnoremap <F3> :set hlsearch!<CR>
+"quickOnes
+
+
+"end quickOnes
+"enable syntax
+syntax enable
+set wrap
+"mouse specific stuff
+set mouse=a
+"Keymappings
+map <Leader>N :NERDTreeToggle<CR>
+
+"buffer related binds
+map <Leader>n :bn<cr>
+map <Leader>p :bp<cr>
+"autocomplete control space
+inoremap <C-Space> <C-x><C-o>
+inoremap <C-@> <C-Space> 
+
+map <Leader>es :source %<CR>
+map <Leader>ec :e ~/.config/nvim/init.vim<CR>
+
+nmap <Leader>f :Files<CR>
+nmap <Leader>b :Buffers<CR>
+
+"close nerdtree if it's the last tab
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" tree view
+let g:netrw_liststyle = 3
+
+"autocompletion for certain languages
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+
+"buffers on top
+let g:airline#extensions#tabline#enabled = 1
+
+"easymotion movement
+map <Leader><Leader><Leader> <Plug>(easymotion-prefix)
+nmap s <Plug>(easymotion-s2)
+map <Leader><leader>w <Plug>(easymotion-bd-w)
+map <Leader><leader>e <Plug>(easymotion-bd-e)
+
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+
+let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
+let g:EasyMotion_smartcase = 1
+"Ale specific settings
+let g:ale_sign_column_always = 1
